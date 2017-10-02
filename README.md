@@ -1,4 +1,6 @@
 ud120-projects
 ==============
 
-Starter project code for students taking Udacity ud120
+My solutions to the Udacity Course ud120 on Machine Learning
+
+Iliakis Konstantinos
