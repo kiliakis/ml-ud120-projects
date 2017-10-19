@@ -2,6 +2,7 @@
 
 from nltk.stem.snowball import SnowballStemmer
 import string
+from nltk.tokenize import word_tokenize
 
 
 def parseOutText(f):
@@ -31,14 +32,15 @@ def parseOutText(f):
         # project part 2: comment out the line below
         # words = text_string
         # print text_string.strip().split(' ')
-        for w in text_string.strip().split(' '):
-            if w != '':
-                words += stemmer.stem(w) + ' '
-            # split the text string into individual words, stem each word,
-            # and append the stemmed word to words (make sure there's a single
-            # space between each stemmed word)
+        # for w in text_string.strip().split(' '):
+        for w in text_string.split():
+            # if w != '':
+            words += stemmer.stem(w) + ' '
+        # split the text string into individual words, stem each word,
+        # and append the stemmed word to words (make sure there's a single
+        # space between each stemmed word)
 
-    return words[:-1]
+    return words.strip()
 
 
 def main():
