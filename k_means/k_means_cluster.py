@@ -43,7 +43,9 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
 
-
+minimum = min([v['salary'] for k,v in data_dict.items() if v['salary'] != 'NaN'])
+maximum = max([v['salary'] for k,v in data_dict.items() if v['salary'] != 'NaN'])
+print minimum, maximum
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
@@ -65,6 +67,9 @@ plt.show()
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
 
+from sklearn.cluster import KMeans
+clf = KMeans(n_clusters=2)
+pred=clf.fit_predict(finance_features)
 
 
 
