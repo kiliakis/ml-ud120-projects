@@ -3,7 +3,7 @@
 import pickle
 import numpy
 numpy.random.seed(42)
-
+from time import time
 
 ### The words (features) and authors (labels), already largely processed.
 ### These files should have been created from the previous (Lesson 10)
@@ -39,5 +39,33 @@ labels_train   = labels_train[:150]
 
 ### your code goes here
 
+from sklearn.tree import DecisionTreeClassifier as dt
+clf = dt()
+t0 = time()
+clf.fit(features_train[:], labels_train[:])
+print 'Training time:', round(time()-t0, 3), 's'
 
 
+t0 = time()
+pred = clf.predict(features_test).tolist()
+print 'Chis Occurrences:', pred.count(1)
+print 'Shara Occurrences:', pred.count(0)
+# print 'Predictions: ', pred
+print 'Predicting time:', round(time()-t0, 3), 's'
+
+
+from sklearn.metrics import accuracy_score
+
+t0 = time()
+accuracy = accuracy_score(pred, labels_test)
+print 'Accuracy score time:', round(time()-t0, 3), 's'
+
+# accuracy = clf.score(features_test, labels_test)
+print 'The accuracy is:', accuracy 
+#########################################################
+
+arr = clf.feature_importances_
+print 'Top importance: %lf' % max(arr)
+print 'Index: %d' % arr.tolist().index(max(arr))
+print 'Word: %s' % vectorizer.get_feature_names()[arr.tolist().index(max(arr))]
+print [(arr[i], vectorizer.get_feature_names()[i]) for i in range(len(arr)) if arr[i] > 0.2]
